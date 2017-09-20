@@ -15,6 +15,7 @@ public class Receita {
     private String ingredientes;
     private String preparo;
     private String modoServir;
+    private Categoria categoria;
     
     public Receita(String nome){
         this.setId(0);
@@ -87,6 +88,16 @@ public class Receita {
     public void setModoServir(String modoServir) {
         this.modoServir = modoServir;
     }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria c) {
+        this.categoria = c;
+        c.setReceita(this);
+    }
+    
     
     
 
