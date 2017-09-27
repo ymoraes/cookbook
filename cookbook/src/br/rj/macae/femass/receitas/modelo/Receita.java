@@ -5,6 +5,9 @@
  */
 package br.rj.macae.femass.receitas.modelo;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author YMoraes
@@ -12,16 +15,30 @@ package br.rj.macae.femass.receitas.modelo;
 public class Receita {
     private int id;
     private String nome;
-    private String ingredientes;
     private String preparo;
     private String modoServir;
     private Categoria categoria;
+    private List<Receita_Ingrediente> ingredientes;
     
     public Receita(String nome){
         this.setId(0);
         this.setNome(nome);
     }
 
+    public List<Receita_Ingrediente> getIngredientes() {
+        return Collections.unmodifiableList(ingredientes);
+       
+    }
+
+    public void setIngredientes(Receita_Ingrediente ingrediente) {
+        this.ingredientes.add(ingrediente);
+    }
+    
+    public void removeIngrediente(Receita_Ingrediente ingrediente){
+        if (this.ingredientes.contains(ingrediente))
+            this.ingredientes.remove(ingrediente);
+    }
+    
     public String toString(){
         return "Receita "+this.getNome();
     }
@@ -52,24 +69,9 @@ public class Receita {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    /**
-     * @return the ingredientes
-     */
-    public String getIngredientes() {
-        return ingredientes;
-    }
-
-    /**
-     * @param ingredientes the ingredientes to set
-     */
-    public void setIngredientes(String ingredientes) {
-        this.ingredientes = ingredientes;
-    }
-
-    /**
-     * @return the preparo
-     */
+    
+    
+    
     public String getPreparo() {
         return preparo;
     }
