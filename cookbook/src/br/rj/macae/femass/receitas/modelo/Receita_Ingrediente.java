@@ -5,6 +5,8 @@
  */
 package br.rj.macae.femass.receitas.modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author YMoraes
@@ -49,6 +51,34 @@ public class Receita_Ingrediente {
     public void setUnidade(String unidade) {
         this.unidade = unidade;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Receita_Ingrediente other = (Receita_Ingrediente) obj;
+        if (!Objects.equals(this.receita, other.receita)) {
+            return false;
+        }
+        if (!Objects.equals(this.ingrediente, other.ingrediente)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
     

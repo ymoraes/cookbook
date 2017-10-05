@@ -54,7 +54,7 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return "Categoria "+this.getNome();
+        return this.getNome();
     }
     
     public void setReceita(Receita r){

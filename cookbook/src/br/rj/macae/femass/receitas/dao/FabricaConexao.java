@@ -12,7 +12,7 @@ public class FabricaConexao {
     public static Connection getConexao(){
         Connection conn=null;
         try { 
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/receitas","postgres","12345678"); 
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5433/cookbook","postgres","12345678"); 
                         
        } catch(SQLException e) {
             e.printStackTrace();
