@@ -37,6 +37,12 @@ public class CategoriaControle {
         List categorias = dao.listarTodos();
         listaCategorias.setListData(categorias.toArray());
     }
+    public void excluir(Categoria r, JList listaCategorias) throws SQLException{
+        CategoriaDAO dao = new CategoriaDAO();
+        dao.excluir(r);
+        List categorias = dao.listarTodos();
+        listaCategorias.setListData(categorias.toArray());
+    }
     public void atualizarListaCategorias(JList listaCategorias) throws SQLException{
         CategoriaDAO dao = new CategoriaDAO();        
         List categorias = dao.listarTodos();

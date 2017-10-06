@@ -7,6 +7,7 @@ package br.rj.macae.femass.receitas.gui;
 
 import br.rj.macae.femass.receitas.controle.CategoriaControle;
 import br.rj.macae.femass.receitas.modelo.Categoria;
+import static java.lang.System.exit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -45,6 +46,8 @@ public class CategoriaGUI extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnGravar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -56,6 +59,7 @@ public class CategoriaGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
         jLabel1.setText("Nome:");
 
         txtNome.addActionListener(new java.awt.event.ActionListener() {
@@ -64,9 +68,10 @@ public class CategoriaGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
         jLabel2.setText("Descrição:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Malgun Gothic", 0, 14)); // NOI18N
         jLabel5.setText("Manter Categoria");
 
         lstCategorias.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -76,13 +81,15 @@ public class CategoriaGUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lstCategorias);
 
-        btnNovo.setText("Novo");
+        btnNovo.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
+        btnNovo.setText("Nova Categoria");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
             }
         });
 
+        btnAlterar.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,8 +97,15 @@ public class CategoriaGUI extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
+        btnGravar.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
         btnGravar.setText("Gravar");
         btnGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,10 +113,19 @@ public class CategoriaGUI extends javax.swing.JFrame {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
+            }
+        });
+
+        btnSair.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -120,26 +143,26 @@ public class CategoriaGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExcluir)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
-                        .addGap(2, 2, 2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnGravar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancelar))
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDescricao)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnGravar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelar))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSair))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,15 +170,17 @@ public class CategoriaGUI extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
                     .addComponent(btnAlterar)
                     .addComponent(btnExcluir))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -167,7 +192,9 @@ public class CategoriaGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGravar)
                     .addComponent(btnCancelar))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSair)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -178,11 +205,18 @@ public class CategoriaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        txtNome.requestFocus(true);
         limparCampos();
         habilitarCampos();// TODO add your handling code here:
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        
+        if(lstCategorias.isSelectionEmpty()){
+        JOptionPane.showMessageDialog(this, "Selecione uma categoria da lista para alterar");
+        return;
+        }
+        habilitarCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -194,7 +228,8 @@ public class CategoriaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-            desabilitarCampos();        // TODO add your handling code here:
+            desabilitarCampos();  
+            // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -220,7 +255,10 @@ public class CategoriaGUI extends javax.swing.JFrame {
             r.setId(((Categoria)lstCategorias.getSelectedValue()).getId());
         }
         controle.gravar(r, lstCategorias);
+        JOptionPane.showMessageDialog(this, "Gravado com sucesso.");
         limparCampos();
+        desabilitarCampos();
+        
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }        // TODO add your handling code here:
@@ -235,6 +273,33 @@ public class CategoriaGUI extends javax.swing.JFrame {
         txtDescricao.setText(r.getDescricao());
                 // TODO add your handling code here:
     }//GEN-LAST:event_lstCategoriasValueChanged
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if(lstCategorias.isSelectionEmpty()){
+        JOptionPane.showMessageDialog(this, "Selecione uma categoria da lista para excluir");
+        return;
+        }
+        if(JOptionPane.showConfirmDialog(null,"Deseja Realmente excluir?")==JOptionPane.YES_OPTION){
+        try{
+        CategoriaControle controle = new CategoriaControle();
+        Categoria r = new Categoria();
+        if(lstCategorias.getSelectedIndex()>=0){
+            r.setId(((Categoria)lstCategorias.getSelectedValue()).getId());
+        }
+        controle.excluir(r, lstCategorias);        
+        limparCampos();
+        desabilitarCampos();
+        
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } 
+        }// TODO add your handling code here:
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+            exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,11 +342,13 @@ public class CategoriaGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JList<Object> lstCategorias;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNome;
@@ -290,11 +357,12 @@ public class CategoriaGUI extends javax.swing.JFrame {
 private void limparCampos() {
         txtNome.setText("");
         txtDescricao.setText("");
+       
         
     }
 private void habilitarCampos() {
-        txtNome.setEnabled(true);
-        txtDescricao.setEnabled(true);
+        txtNome.setEditable(true);
+        txtDescricao.setEditable(true);
         btnGravar.setVisible(true);
         btnCancelar.setVisible(true);
         lstCategorias.clearSelection();
@@ -302,8 +370,9 @@ private void habilitarCampos() {
         
     }
 private void desabilitarCampos() {
-        txtNome.setEnabled(false);
-        txtDescricao.setEnabled(false);
+        
+        txtNome.setEditable(false);
+        txtDescricao.setEditable(false);
         btnGravar.setVisible(false);
         btnCancelar.setVisible(false);
         lstCategorias.setEnabled(true);
