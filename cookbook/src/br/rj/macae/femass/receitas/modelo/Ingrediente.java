@@ -18,6 +18,10 @@ public class Ingrediente {
     private String descricao;
     private List<Receita_Ingrediente> receitas;
 
+    public Ingrediente() {
+    }
+
+    
     public List<Receita_Ingrediente> getReceitas() {
         return Collections.unmodifiableList(receitas);
        

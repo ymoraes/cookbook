@@ -5,8 +5,8 @@
  */
 package br.rj.macae.femass.receitas.gui;
 
-import br.rj.macae.femass.receitas.controle.CategoriaControle;
-import br.rj.macae.femass.receitas.modelo.Categoria;
+import br.rj.macae.femass.receitas.controle.IngredienteControle;
+import br.rj.macae.femass.receitas.modelo.Ingrediente;
 import static java.lang.System.exit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author YMoraes
  */
-public class CategoriaGUI extends javax.swing.JFrame {
+public class IngredienteGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form CategoriaGUI
+     * Creates new form IngredienteGUI
      */
-    public CategoriaGUI() {
+    public IngredienteGUI() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class CategoriaGUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstCategorias = new javax.swing.JList<>();
+        lstIngredientes = new javax.swing.JList<>();
         btnNovo = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -72,17 +72,17 @@ public class CategoriaGUI extends javax.swing.JFrame {
         jLabel2.setText("Descrição:");
 
         jLabel5.setFont(new java.awt.Font("Malgun Gothic", 0, 14)); // NOI18N
-        jLabel5.setText("Manter Categoria");
+        jLabel5.setText("Manter Ingredientes");
 
-        lstCategorias.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        lstIngredientes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstCategoriasValueChanged(evt);
+                lstIngredientesValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(lstCategorias);
+        jScrollPane1.setViewportView(lstIngredientes);
 
         btnNovo.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
-        btnNovo.setText("Nova Categoria");
+        btnNovo.setText("Novo Ingrediente");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
@@ -212,8 +212,8 @@ public class CategoriaGUI extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         
-        if(lstCategorias.isSelectionEmpty()){
-        JOptionPane.showMessageDialog(this, "Selecione uma categoria da lista para alterar");
+        if(lstIngredientes.isSelectionEmpty()){
+        JOptionPane.showMessageDialog(this, "Selecione uma ingrediente da lista para alterar");
         return;
         }
         habilitarCampos();
@@ -233,9 +233,9 @@ public class CategoriaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        CategoriaControle controle = new CategoriaControle();
+        IngredienteControle controle = new IngredienteControle();
         try {
-            controle.atualizarListaCategorias(lstCategorias);
+            controle.atualizarListaIngredientes(lstIngredientes);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }        // TODO add your handling code here:
@@ -247,14 +247,14 @@ public class CategoriaGUI extends javax.swing.JFrame {
         return;
         }
         try{
-        CategoriaControle controle = new CategoriaControle();
-        Categoria r = new Categoria();
+        IngredienteControle controle = new IngredienteControle();
+        Ingrediente r = new Ingrediente();
         r.setNome(txtNome.getText());
         r.setDescricao(txtDescricao.getText());
-        if(lstCategorias.getSelectedIndex()>=0){
-            r.setId(((Categoria)lstCategorias.getSelectedValue()).getId());
+        if(lstIngredientes.getSelectedIndex()>=0){
+            r.setId(((Ingrediente)lstIngredientes.getSelectedValue()).getId());
         }
-        controle.gravar(r, lstCategorias);
+        controle.gravar(r, lstIngredientes);
         JOptionPane.showMessageDialog(this, "Gravado com sucesso.");
         limparCampos();
         desabilitarCampos();
@@ -264,29 +264,29 @@ public class CategoriaGUI extends javax.swing.JFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnGravarActionPerformed
 
-    private void lstCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstCategoriasValueChanged
-        Categoria r = new Categoria();    
-        r = (Categoria)lstCategorias.getSelectedValue();
+    private void lstIngredientesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstIngredientesValueChanged
+        Ingrediente r = new Ingrediente();    
+        r = (Ingrediente)lstIngredientes.getSelectedValue();
 
         if (r==null) return;
         txtNome.setText(r.getNome());
         txtDescricao.setText(r.getDescricao());
                 // TODO add your handling code here:
-    }//GEN-LAST:event_lstCategoriasValueChanged
+    }//GEN-LAST:event_lstIngredientesValueChanged
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if(lstCategorias.isSelectionEmpty()){
-        JOptionPane.showMessageDialog(this, "Selecione uma categoria da lista para excluir");
+        if(lstIngredientes.isSelectionEmpty()){
+        JOptionPane.showMessageDialog(this, "Selecione uma ingrediente da lista para excluir");
         return;
         }
         if(JOptionPane.showConfirmDialog(null,"Deseja Realmente excluir?")==JOptionPane.YES_OPTION){
         try{
-        CategoriaControle controle = new CategoriaControle();
-        Categoria r = new Categoria();
-        if(lstCategorias.getSelectedIndex()>=0){
-            r.setId(((Categoria)lstCategorias.getSelectedValue()).getId());
+        IngredienteControle controle = new IngredienteControle();
+        Ingrediente r = new Ingrediente();
+        if(lstIngredientes.getSelectedIndex()>=0){
+            r.setId(((Ingrediente)lstIngredientes.getSelectedValue()).getId());
         }
-        controle.excluir(r, lstCategorias);        
+        controle.excluir(r, lstIngredientes);        
         limparCampos();
         desabilitarCampos();
         
@@ -318,20 +318,21 @@ public class CategoriaGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CategoriaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngredienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CategoriaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngredienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CategoriaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngredienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CategoriaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngredienteGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CategoriaGUI().setVisible(true);
+                new IngredienteGUI().setVisible(true);
             }
         });
     }
@@ -349,7 +350,7 @@ public class CategoriaGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JList<Object> lstCategorias;
+    private javax.swing.JList<Object> lstIngredientes;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
@@ -365,7 +366,7 @@ private void habilitarCampos() {
         txtDescricao.setEditable(true);
         btnGravar.setVisible(true);
         btnCancelar.setVisible(true);
-        lstCategorias.setEnabled(false);
+        lstIngredientes.setEnabled(false);
         
     }
 private void desabilitarCampos() {
@@ -374,7 +375,7 @@ private void desabilitarCampos() {
         txtDescricao.setEditable(false);
         btnGravar.setVisible(false);
         btnCancelar.setVisible(false);
-        lstCategorias.setEnabled(true);
+        lstIngredientes.setEnabled(true);
     }
 
 }
