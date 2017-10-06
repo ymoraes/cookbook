@@ -51,11 +51,12 @@ public class CategoriaDAO implements IDAO {
             conn = FabricaConexao.getConexao();
 
             String sql = "update categoria  set "
-                    + "nome = ?, "
-                    + "descricao = ?,"                  
+                    + "nome =?,"
+                    + "descricao = ?"                  
                     + "where id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             // preenche os valores         
+            
             stmt.setString(1, categoria.getNome());
             stmt.setString(2, categoria.getDescricao());
             stmt.setInt(3, categoria.getId());
@@ -84,7 +85,7 @@ public class CategoriaDAO implements IDAO {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            throw new SQLException("Eroo ao tentar remover a categoria. \n" + e.getMessage());
+            throw new SQLException("Erro ao tentar remover a categoria. \n" + e.getMessage());
         }
     }
 
@@ -94,7 +95,7 @@ public class CategoriaDAO implements IDAO {
         Connection conn = null;
         try {
             conn = FabricaConexao.getConexao();
-            String sql = "select * from categoria";
+            String sql = "select * from categoria ORDER BY id ASC";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
