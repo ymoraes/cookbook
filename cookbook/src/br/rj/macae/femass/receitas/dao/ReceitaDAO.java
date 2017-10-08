@@ -7,6 +7,7 @@ package br.rj.macae.femass.receitas.dao;
 
 import br.rj.macae.femass.receitas.modelo.Categoria;
 import br.rj.macae.femass.receitas.modelo.Receita;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,10 +104,11 @@ public class ReceitaDAO implements IDAO{
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Receita r = new Receita(rs.getString("nome"));
+                Receita r = new Receita();
                 r.setNome(rs.getString("nome"));
                 r.setPreparo(rs.getString("preparo"));
                 r.setModoServir(rs.getString("modoservir"));
+                
 //                r.setCategoria(rs.getInt("categoria"));
                 
                 r.setId(rs.getInt("id"));
@@ -146,5 +148,8 @@ public class ReceitaDAO implements IDAO{
             throw new SQLException("Eroo ao recuperar a receita. \n" + e.getMessage());
         }
     }
+
+        
+
     
 }

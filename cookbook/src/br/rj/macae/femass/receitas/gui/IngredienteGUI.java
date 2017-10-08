@@ -7,6 +7,8 @@ package br.rj.macae.femass.receitas.gui;
 
 import br.rj.macae.femass.receitas.controle.IngredienteControle;
 import br.rj.macae.femass.receitas.modelo.Ingrediente;
+import br.rj.macae.femass.receitas.modelo.Receita;
+import java.awt.event.ComponentListener;
 import static java.lang.System.exit;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -48,6 +50,7 @@ public class IngredienteGUI extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         btnSair = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -128,6 +131,13 @@ public class IngredienteGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Adicionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,6 +151,8 @@ public class IngredienteGUI extends javax.swing.JFrame {
                         .addComponent(btnAlterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExcluir)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -176,7 +188,8 @@ public class IngredienteGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
                     .addComponent(btnAlterar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
@@ -193,7 +206,7 @@ public class IngredienteGUI extends javax.swing.JFrame {
                     .addComponent(btnCancelar))
                 .addGap(18, 18, 18)
                 .addComponent(btnSair)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -302,6 +315,14 @@ public class IngredienteGUI extends javax.swing.JFrame {
             dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Receita r = new Receita();    
+        r = (Receita)lstIngredientes.getSelectedValue();
+
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -345,6 +366,7 @@ public class IngredienteGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
