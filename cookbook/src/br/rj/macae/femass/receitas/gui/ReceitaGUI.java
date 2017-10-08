@@ -6,21 +6,29 @@
 package br.rj.macae.femass.receitas.gui;
 
 import br.rj.macae.femass.receitas.controle.CategoriaControle;
+import br.rj.macae.femass.receitas.controle.ReceitaControle;
+import br.rj.macae.femass.receitas.dao.CategoriaDAO;
+import br.rj.macae.femass.receitas.dao.ReceitaDAO;
 import br.rj.macae.femass.receitas.modelo.Categoria;
+import br.rj.macae.femass.receitas.modelo.Receita;
 import static java.lang.System.exit;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author YMoraes
  */
-public class CategoriaGUI extends javax.swing.JFrame {
+public class ReceitaGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form CategoriaGUI
+     * Creates new form ReceitaGUI
      */
-    public CategoriaGUI() {
+    public ReceitaGUI() {
         initComponents();
     }
 
@@ -36,11 +44,10 @@ public class CategoriaGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstCategorias = new javax.swing.JList<>();
+        lstReceitas = new javax.swing.JList<>();
         btnNovo = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -48,6 +55,17 @@ public class CategoriaGUI extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         btnSair = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtPreparo = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtModoServir = new javax.swing.JTextArea();
+        cboCategoria = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lstIngrediente = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -68,20 +86,20 @@ public class CategoriaGUI extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
-        jLabel2.setText("Descrição:");
+        jLabel2.setText("Modo Preparo:");
 
         jLabel5.setFont(new java.awt.Font("Malgun Gothic", 0, 14)); // NOI18N
-        jLabel5.setText("Manter Categoria");
+        jLabel5.setText("Manter Receitas");
 
-        lstCategorias.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        lstReceitas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstCategoriasValueChanged(evt);
+                lstReceitasValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(lstCategorias);
+        jScrollPane1.setViewportView(lstReceitas);
 
         btnNovo.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
-        btnNovo.setText("Nova Categoria");
+        btnNovo.setText("Nova Receita");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
@@ -128,72 +146,119 @@ public class CategoriaGUI extends javax.swing.JFrame {
             }
         });
 
+        txtPreparo.setColumns(20);
+        txtPreparo.setRows(5);
+        jScrollPane2.setViewportView(txtPreparo);
+
+        jLabel3.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
+        jLabel3.setText("Modo Servir:");
+
+        txtModoServir.setColumns(20);
+        txtModoServir.setRows(5);
+        jScrollPane3.setViewportView(txtModoServir);
+
+        jLabel4.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
+        jLabel4.setText("Categoria:");
+
+        jLabel6.setFont(new java.awt.Font("Malgun Gothic", 0, 11)); // NOI18N
+        jLabel6.setText("Ingredientes:");
+
+        jScrollPane4.setViewportView(lstIngrediente);
+
+        jButton1.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        jButton1.setText("+");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAlterar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluir)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnGravar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancelar))
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSair))
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSair)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnNovo)
+                            .addGap(6, 6, 6)
+                            .addComponent(btnAlterar)
+                            .addGap(6, 6, 6)
+                            .addComponent(btnExcluir))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(23, 23, 23)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(35, 35, 35)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnGravar)
+                            .addGap(6, 6, 6)
+                            .addComponent(btnCancelar))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel1))
+                            .addGap(35, 35, 35)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                                .addComponent(cboCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(0, 0, 0)
+                            .addComponent(jButton1))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNovo)
                     .addComponent(btnAlterar)
                     .addComponent(btnExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel4))
+                    .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGravar)
                     .addComponent(btnCancelar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSair)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -205,15 +270,15 @@ public class CategoriaGUI extends javax.swing.JFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         txtNome.requestFocus(true);
-        lstCategorias.clearSelection();
+        lstReceitas.clearSelection();
         limparCampos();
         habilitarCampos();// TODO add your handling code here:
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         
-        if(lstCategorias.isSelectionEmpty()){
-        JOptionPane.showMessageDialog(this, "Selecione uma categoria da lista para alterar");
+        if(lstReceitas.isSelectionEmpty()){
+        JOptionPane.showMessageDialog(this, "Selecione uma receita da lista para alterar");
         return;
         }
         txtNome.requestFocus(true);
@@ -234,9 +299,21 @@ public class CategoriaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        CategoriaControle controle = new CategoriaControle();
+        cboCategoria.removeAllItems();
+        
         try {
-            controle.atualizarListaCategorias(lstCategorias);
+            List<Categoria> lc = new CategoriaDAO().listarTodos();
+                for(Categoria c: lc){
+                cboCategoria.addItem(c);
+                } 
+        }catch (SQLException ex) {
+            Logger.getLogger(ReceitaGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+                
+        ReceitaControle controle = new ReceitaControle();
+        try {
+            controle.atualizarListaReceitas(lstReceitas);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }        // TODO add your handling code here:
@@ -248,14 +325,16 @@ public class CategoriaGUI extends javax.swing.JFrame {
         return;
         }
         try{
-        CategoriaControle controle = new CategoriaControle();
-        Categoria r = new Categoria();
+        ReceitaControle controle = new ReceitaControle();
+        Receita r = new Receita();
         r.setNome(txtNome.getText());
-        r.setDescricao(txtDescricao.getText());
-        if(lstCategorias.getSelectedIndex()>=0){
-            r.setId(((Categoria)lstCategorias.getSelectedValue()).getId());
+        r.setPreparo(txtPreparo.getText());
+        r.setModoServir(txtModoServir.getText());
+        r.setCategoria((Categoria) cboCategoria.getSelectedItem());
+        if(lstReceitas.getSelectedIndex()>=0){
+            r.setId(((Receita)lstReceitas.getSelectedValue()).getId());
         }
-        controle.gravar(r, lstCategorias);
+        controle.gravar(r, lstReceitas);
         JOptionPane.showMessageDialog(this, "Gravado com sucesso.");
         limparCampos();
         desabilitarCampos();
@@ -265,29 +344,31 @@ public class CategoriaGUI extends javax.swing.JFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnGravarActionPerformed
 
-    private void lstCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstCategoriasValueChanged
-        Categoria r = new Categoria();    
-        r = (Categoria)lstCategorias.getSelectedValue();
+    private void lstReceitasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstReceitasValueChanged
+        Receita r = new Receita();    
+        r = (Receita)lstReceitas.getSelectedValue();
 
         if (r==null) return;
         txtNome.setText(r.getNome());
-        txtDescricao.setText(r.getDescricao());
+        txtPreparo.setText(r.getPreparo());
+        txtModoServir.setText(r.getModoServir());
+        cboCategoria.setSelectedItem(r.getCategoria());
                 // TODO add your handling code here:
-    }//GEN-LAST:event_lstCategoriasValueChanged
+    }//GEN-LAST:event_lstReceitasValueChanged
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if(lstCategorias.isSelectionEmpty()){
-        JOptionPane.showMessageDialog(this, "Selecione uma categoria da lista para excluir");
+        if(lstReceitas.isSelectionEmpty()){
+        JOptionPane.showMessageDialog(this, "Selecione uma receita da lista para excluir");
         return;
         }
         if(JOptionPane.showConfirmDialog(null,"Deseja Realmente excluir?")==JOptionPane.YES_OPTION){
         try{
-        CategoriaControle controle = new CategoriaControle();
-        Categoria r = new Categoria();
-        if(lstCategorias.getSelectedIndex()>=0){
-            r.setId(((Categoria)lstCategorias.getSelectedValue()).getId());
+        ReceitaControle controle = new ReceitaControle();
+        Receita r = new Receita();
+        if(lstReceitas.getSelectedIndex()>=0){
+            r.setId(((Receita)lstReceitas.getSelectedValue()).getId());
         }
-        controle.excluir(r, lstCategorias);        
+        controle.excluir(r, lstReceitas);        
         limparCampos();
         desabilitarCampos();
         
@@ -299,7 +380,7 @@ public class CategoriaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-            hide();        // TODO add your handling code here:
+            dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_btnSairActionPerformed
 
     /**
@@ -319,20 +400,23 @@ public class CategoriaGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CategoriaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReceitaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CategoriaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReceitaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CategoriaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReceitaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CategoriaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReceitaGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CategoriaGUI().setVisible(true);
+                new ReceitaGUI().setVisible(true);
             }
         });
     }
@@ -344,39 +428,53 @@ public class CategoriaGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSair;
+    private javax.swing.JComboBox cboCategoria;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JList<Object> lstCategorias;
-    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JList<String> lstIngrediente;
+    private javax.swing.JList<Object> lstReceitas;
+    private javax.swing.JTextArea txtModoServir;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextArea txtPreparo;
     // End of variables declaration//GEN-END:variables
 
 private void limparCampos() {
         txtNome.setText("");
-        txtDescricao.setText("");
+        txtPreparo.setText("");
+        txtModoServir.setText("");
+        
        
         
     }
 private void habilitarCampos() {
         txtNome.setEditable(true);
-        txtDescricao.setEditable(true);
+        txtPreparo.setEditable(true);
+        txtModoServir.setEditable(true);
         btnGravar.setVisible(true);
         btnCancelar.setVisible(true);
-        lstCategorias.setEnabled(false);
-        
-        
+        lstReceitas.setEnabled(false);
+        cboCategoria.setEnabled(true);
     }
 private void desabilitarCampos() {
         
         txtNome.setEditable(false);
-        txtDescricao.setEditable(false);
+        txtPreparo.setEditable(false);
+        txtModoServir.setEditable(false);
         btnGravar.setVisible(false);
         btnCancelar.setVisible(false);
-        lstCategorias.setEnabled(true);
+        lstReceitas.setEnabled(true);
+        cboCategoria.setEnabled(false);
     }
 
 }

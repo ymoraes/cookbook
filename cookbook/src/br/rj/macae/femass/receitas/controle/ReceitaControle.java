@@ -36,6 +36,12 @@ public class ReceitaControle {
         List receitas = dao.listarTodos();
         listaReceitas.setListData(receitas.toArray());
     }
+    public void excluir(Receita r, JList listaReceitas) throws SQLException{
+        ReceitaDAO dao = new ReceitaDAO();
+        dao.excluir(r);
+        List receitas = dao.listarTodos();
+        listaReceitas.setListData(receitas.toArray());
+    }
     public void atualizarListaReceitas(JList listaReceitas) throws SQLException{
         ReceitaDAO dao = new ReceitaDAO();        
         List receitas = dao.listarTodos();

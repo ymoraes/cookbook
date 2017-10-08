@@ -5,6 +5,7 @@
  */
 package br.rj.macae.femass.receitas.dao;
 
+import br.rj.macae.femass.receitas.modelo.Categoria;
 import br.rj.macae.femass.receitas.modelo.Receita;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,19 +27,20 @@ public class ReceitaDAO implements IDAO{
         try {
             conn = FabricaConexao.getConexao();
 
-            String sql = "insert into receita (nome,ingredientes,preparo) "
-                    + "values (?,?,?)";
+            String sql = "insert into receita (nome, preparo, modoServir, categoria) "
+                    + "values (?,?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             // preenche os valores         
             stmt.setString(1, receita.getNome());
-            stmt.setString(2, receita.getIngredientes());
-            stmt.setString(3, receita.getPreparo());
+            stmt.setString(2, receita.getPreparo());
+            stmt.setString(3, receita.getModoServir());
+            stmt.setInt(4, receita.getCategoria().getId());
             
             stmt.executeUpdate();
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            throw new SQLException("Eroo ao tentar cadastrar a receita. \n" + e.getMessage());
+            throw new SQLException("Erro ao tentar cadastrar a receita. \n" + e.getMessage());
         }
     }
 
@@ -51,20 +53,22 @@ public class ReceitaDAO implements IDAO{
 
             String sql = "update receita  set "
                     + "nome = ?, "
-                    + "ingredientes = ?,"
-                    + "preparo = ?"                    
+                    + "preparo = ?,"
+                    + "modoServir = ?,"                    
+                    + "categoria = ?"                    
                     + "where id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             // preenche os valores         
             stmt.setString(1, receita.getNome());
-            stmt.setString(2, receita.getIngredientes());
-            stmt.setString(3, receita.getPreparo());
-            stmt.setInt(4, receita.getId());
+            stmt.setString(2, receita.getPreparo());
+            stmt.setString(3, receita.getModoServir());
+            stmt.setInt(4, receita.getCategoria().getId());
+            stmt.setInt(5, receita.getId());
             stmt.executeUpdate();
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            throw new SQLException("Eroo ao tentar alterar a receita. \n" + e.getMessage());
+            throw new SQLException("Erro ao tentar alterar a receita. \n" + e.getMessage());
         }
     }
 
@@ -85,7 +89,7 @@ public class ReceitaDAO implements IDAO{
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            throw new SQLException("Eroo ao tentar remover a receita. \n" + e.getMessage());
+            throw new SQLException("Erro ao tentar remover a receita. \n" + e.getMessage());
         }
     }
 
@@ -100,8 +104,11 @@ public class ReceitaDAO implements IDAO{
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Receita r = new Receita(rs.getString("nome"));
-                r.setIngredientes(rs.getString("ingredientes"));
+                r.setNome(rs.getString("nome"));
                 r.setPreparo(rs.getString("preparo"));
+                r.setModoServir(rs.getString("modoservir"));
+//                r.setCategoria(rs.getInt("categoria"));
+                
                 r.setId(rs.getInt("id"));
                 lista.add(r);
             }
@@ -126,7 +133,7 @@ public class ReceitaDAO implements IDAO{
             ResultSet rs = stmt.executeQuery();
             rs.next();
             Receita r = new Receita(rs.getString("nome"));
-            r.setIngredientes(rs.getString("ingredientes"));
+            
             r.setPreparo(rs.getString("preparo"));
             r.setId(rs.getInt("id"));
             

@@ -6,6 +6,7 @@ package br.rj.macae.femass.receitas.dao;
 import br.rj.macae.femass.receitas.dao.FabricaConexao;
 import br.rj.macae.femass.receitas.dao.IDAO;
 import br.rj.macae.femass.receitas.modelo.Categoria;
+import java.io.IOException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -140,5 +143,6 @@ public class CategoriaDAO implements IDAO {
             throw new SQLException("Eroo ao recuperar a categoria. \n" + e.getMessage());
         }
     }
+   
     
 }

@@ -25,6 +25,10 @@ public class Receita {
         this.setNome(nome);
     }
 
+    public Receita() {
+    }
+    
+
     public List<Receita_Ingrediente> getIngredientes() {
         return Collections.unmodifiableList(ingredientes);
        
@@ -40,7 +44,7 @@ public class Receita {
     }
     
     public String toString(){
-        return "Receita "+this.getNome();
+        return "Cod:"+this.getId()+" | "+this.getNome();
     }
     /**
      * @return the id

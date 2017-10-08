@@ -49,7 +49,6 @@ public class IngredienteGUI extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -206,6 +205,7 @@ public class IngredienteGUI extends javax.swing.JFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         txtNome.requestFocus(true);
+        lstIngredientes.clearSelection();
         limparCampos();
         habilitarCampos();// TODO add your handling code here:
     }//GEN-LAST:event_btnNovoActionPerformed
@@ -216,6 +216,7 @@ public class IngredienteGUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Selecione uma ingrediente da lista para alterar");
         return;
         }
+        txtNome.requestFocus(true);
         habilitarCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAlterarActionPerformed
@@ -298,7 +299,7 @@ public class IngredienteGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-            exit(0);        // TODO add your handling code here:
+            dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_btnSairActionPerformed
 
     /**
